@@ -18,8 +18,8 @@ handlers:
      static_files: build/service-worker.json
      upload: build/service-worker.json
    - url: /pageIcon.png
-     static_files: build/favicon.ico
-     upload: build/favicon.ico
+     static_files: build/iconoweb.svg
+     upload: build/iconoweb.svg
    - url: /.*
      static_files: build/index.html
      upload: build/index.html

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import Loggin, { authenticationService } from './Loggin';
+import ConsoleHelper from '../helper/ConsoleHelper'
+
+
+
 class About extends Component {
   render() {
  
-    console.log(authenticationService.currentUserValue) 
+    ConsoleHelper(authenticationService.currentUserValue) 
     return (
         
       <div>
@@ -36,27 +40,6 @@ class About extends Component {
 
           </section>
 
-
-          <section class="pt-5">
-
-              <div class="row mt-3 wow fadeIn">
-
-              <div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-                    
-                    </div>                 
-
-              </div>
-
-
-              <div class="row wow fadeIn">
-
-              <div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-                    
-                    </div> 
-
-              </div>
-             
-          </section>
       </div>
   </main>
 

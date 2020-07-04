@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Loggin, { authenticationService } from './Loggin';
 import { userLogged } from './analytics/extractor/matchesTeam';
-
+import ConsoleHelper from '../helper/ConsoleHelper'
 
 const getMatches = async function(tok) {
   let match = await userLogged(tok);
-  //console.log(match)
+  //ConsoleHelper(match)
   return(match)
 }
 
@@ -22,7 +22,7 @@ class Contact extends Component {
   
   render() {
  
-    console.log(authenticationService.currentUserValue) 
+    ConsoleHelper(authenticationService.currentUserValue) 
     return (
         
       <div>
@@ -30,7 +30,7 @@ class Contact extends Component {
 
      
       <main class="mt-5 pt-5" style={{backgroundColor:'#f7fcff'}} >
-      <div class="container" >
+      <div style={{marginTop:'40px'}} class="container" >
 
 
           <section class="card blue-gradient wow fadeIn" id="intro">

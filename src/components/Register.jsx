@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import React, { Component } from 'react';
 import axios from 'axios';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
-
+import ConsoleHelper from '../helper/ConsoleHelper'
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
@@ -46,19 +46,19 @@ class Register extends Component {
       e.preventDefault()
 
       //const { m, n, p } = this.state
-      // console.log(this.state.m)
-      // console.log(this.state.n)
-      // console.log(this.state.p)
-      console.log(this.state.p)
-      axios.post('https://young-shore-87060.herokuapp.com/regist', { accept: 'application/json','content-type': 'application/json',email:this.state.m,nombre:this.state.n,password:this.state.p})
+      // ConsoleHelper(this.state.m)
+      // ConsoleHelper(this.state.n)
+      // ConsoleHelper(this.state.p)
+      ConsoleHelper(this.state.p)
+      axios.post('http://localhost:3000/regist', { accept: 'application/json','content-type': 'application/json',email:this.state.m,nombre:this.state.n,password:this.state.p})
          .then(({ data }) => { 
           
-          let token = {usuario:{nombre : this.state.n, mail : this.state.m, logged : true}}
-          console.log(data)
-          localStorage.setItem('currentUser', JSON.stringify(token));
-          currentUserSubject.next(token);
+          //let token = {usuario:{nombre : this.state.n, mail : this.state.m, logged : true}}
+          ConsoleHelper(data)
+          //localStorage.setItem('currentUser', JSON.stringify(data));
+          //currentUserSubject.next(data);
           //return (window.location.href = "/cognitive-test")
-         }).then(() => {return (window.location.href = "/cognitive-test")})
+         }).then(() => {return (window.location.href = "/")})
          .catch(( err ) => this.setState({message:'Parece que el email y contraseña no coinciden o que el nombre y/o email ya están en uso'}))
         //   this.setState({         
         //   ...CLEAR_STATE,
@@ -84,7 +84,7 @@ class Register extends Component {
               <MDBRow>
                 <MDBCol  style={{marginTop:'20px'}}  md="6">
                   <form  onSubmit={this.handleSubmit}>
-                    <p className="h4 text-center mb-4">Sign in</p>
+                    <p className="h4 text-center mb-4">Register</p>
                     {/* <label htmlFor="defaultFormLoginNameEx" className="grey-text">
                       Tu nombre
                     </label>
@@ -119,6 +119,7 @@ class Register extends Component {
                       className="form-control"
                     />
                     <br />
+                    <br />
                     <label htmlFor="defaultFormLoginPasswordEx" className="grey-text">
                       Tu Contraseña
                     </label>
@@ -130,15 +131,13 @@ class Register extends Component {
                       className="form-control"
                     />
                     <div className="text-center mt-4">
-                      <MDBBtn style={{marginTop:'40px'}}  color="indigo" type='submit' value='Register'>Login</MDBBtn>
+                      <MDBBtn style={{marginTop:'40px'}}  color="indigo" type='submit' value='Register'>Registrar</MDBBtn>
                     </div>
                   </form>
                 </MDBCol>
                 <p style= {{fontSize: '20px', right:'40', marginTop:'-120px', position:'absolute', textAlign:'center'}}>
                       <strong>Introduce un correo para que podamos devolverte tus resultados <br/> 
-                      ¡El nombre puede ser el que quieras! 
-                      </strong>
-                      
+                      </strong>   
                   </p>
               </MDBRow>
             </MDBContainer>

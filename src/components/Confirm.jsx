@@ -2,13 +2,13 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import ConsoleHelper from '../helper/ConsoleHelper'
 class Confirm extends Component {
   render() {
       
     
     const validate = () => {
-        
+      ConsoleHelper(this.props.match.params.token)
         axios.put(`http://localhost:3000/confirmation`, { accept: 'application/json','content-type': 'application/json', token : this.props.match.params.token}
     //     {method: 'post',
     //     headers: 
@@ -18,7 +18,7 @@ class Confirm extends Component {
         )
             .then(({ data }) => { 
               let token = this.props.match.params.token; 
-              console.log(JSON.stringify(data))
+              ConsoleHelper(JSON.stringify(data))
               //localStorage.setItem('currentUser', JSON.stringify(data));
               //currentUserSubject.next(data);
             //   this.setState({         
@@ -27,7 +27,7 @@ class Confirm extends Component {
             //   message: `Bienvenido ${''}`
             // })
           }).then(() => {return (window.location.href = "/")})
-            .catch(( err ) => console.log(err))
+            .catch(( err ) => ConsoleHelper(err))
         }
 
         validate();

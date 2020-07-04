@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import React, { Component } from 'react';
 import axios from 'axios';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
-
+import ConsoleHelper from '../helper/ConsoleHelper'
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
@@ -44,20 +44,18 @@ class Loggin extends Component {
   
     handleSubmit = (e) => {
       e.preventDefault()
-
+      this.setState({message:'cargando...'})
       //const { m, n, p } = this.state
-      // console.log(this.state.m)
-      // console.log(this.state.n)
-      // console.log(this.state.p)
-      console.log(this.state.p)
-      axios.post('https://young-shore-87060.herokuapp.com/loggin', { accept: 'application/json','content-type': 'application/json',email:this.state.m,password:this.state.p})
+      // ConsoleHelper(this.state.m)
+      // ConsoleHelper(this.state.n)
+      // ConsoleHelper(this.state.p)
+      //ConsoleHelper(this.state.p)
+      axios.post('http://localhost:3000/login', { accept: 'application/json','content-type': 'application/json',email:this.state.m,password:this.state.p})
          .then(({ data }) => { 
-          
-          let token = {usuario:{nombre : this.state.n, mail : this.state.m, logged : true}}
-          console.log(data)
+          //let token = {usuario:{nombre : this.state.n, mail : this.state.m, logged : true}}
+          ConsoleHelper(data)
           localStorage.setItem('currentUser', JSON.stringify(data));
-          currentUserSubject.next(data);
-          
+          currentUserSubject.next(data);    
          }).then(() => {return (window.location.href = "/cognitive-test")})
          .catch(( err ) => this.setState({message:'Parece que el email y contraseña no coinciden o no existen'}))
         //   this.setState({         

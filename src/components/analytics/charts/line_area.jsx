@@ -1,70 +1,103 @@
-import ApexCharts from "react-apexcharts";
+import ReactApexChart, {Apex} from "react-apexcharts";
 import React, { Component } from 'react';
-  
-var generateDayWiseTimeSeries = function (baseval, count, yrange) {
-    var i = 0;
-    var series = [];
-    while (i < count) {
-      var x = baseval;
-      var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+import ConsoleHelper from "../../../helper/ConsoleHelper";
 
-      series.push([x, y]);
-      baseval += 86400000;
-      i++;
-    }
-    return series;
-  }
 
-    
-  const state = function(){ return (
-    {  options: {
-      chart: {
-        id: "basic-bar"
+const state =  
+      {options: {
+        chart: {
+          shadow: {
+            enabled: true,
+            color: '#ffffff',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 1
+          },
+          toolbar: {
+            show: false
+          }
+        },
+        colors: ['#77B6EA','#0070c0', '#000000','#000000'],
+        dataLabels: {
+          enabled: true,
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        title: {
+          text: 'Average High & Low Temperature',
+          align: 'left'
+        },
+        grid: {
+          borderColor: '#ffffff',
+          row: {
+            colors: ['#ffffff', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.0
+          },
+        },
+        markers: {
+
+          size: 6
+        },
+        xaxis: {
+          categories: [1,2,3,4,5],
+          title: {
+            text: 'Bloque'
+          }
+        },
+        yaxis: {
+          title: {
+            text: 'Aciertos(HIT, CR) /Fallos(FA, OM)'
+          },
+          min: 0,
+          max: 14
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'right',
+          floating: true,
+          offsetY: -25,
+          offsetX: -5
+        }
       },
-      xaxis: {
-        categories: []
-      }
-    },
     series: [
       {
-        name: "series-1",
-        data: []
+        name: "HIT",
+        data: [1,2,3,1,2]
+      },
+      {
+        name: "CR",
+        data: [1,5,5,7,2]
+      },
+      {
+        name: "FA",
+        data: [1,4,6,8,2]
+      },
+      {
+        name: "OM",
+        data: [1,9,6,9,2]
       }
     ],
-   
-    } 
-  )}
+  }
     
- 
-
   
-export default function Chart(winns) {
-
- 
-      let estado = {};
-      console.log(winns.winns)
-      estado = state();
-      estado.series[0].data = winns.winns
-      // Object.keys(winns).map(matches =>{estado.series[0].data = winns;
-      //  })
-
-      //  console.log(estado.series)
-      
-       
-        
-        return (
-        
 
 
-  
-          <ApexCharts  options={estado.options} series={estado.series} type="line"  />
-    
-          
 
 
-      );
-      
-    
-      
-    }
-  
+
+
+function LineChart ({optiones, series}) {
+
+ConsoleHelper(optiones)
+    return (
+
+        <div>
+          <ReactApexChart options={optiones} series={series} type="line" height="350" />
+        </div>
+
+    );
+}
+
+export default LineChart;
